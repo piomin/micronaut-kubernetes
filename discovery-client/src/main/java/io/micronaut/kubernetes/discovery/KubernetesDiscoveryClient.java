@@ -29,8 +29,6 @@ import io.micronaut.kubernetes.client.v1.endpoints.Endpoints;
 import io.micronaut.kubernetes.client.v1.services.ServiceList;
 import io.reactivex.Flowable;
 import org.reactivestreams.Publisher;
-
-import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.net.URI;
@@ -81,6 +79,10 @@ public class KubernetesDiscoveryClient implements DiscoveryClient {
         return ServiceInstance.of(serviceId, address.getIp().getHostAddress(), port.getPort());
     }
 
+    /**
+     *
+     * @return a List of the service metadata's name
+     */
     @Override
     public Publisher<List<String>> getServiceIds() {
         return Flowable.fromPublisher(client.listServices())
